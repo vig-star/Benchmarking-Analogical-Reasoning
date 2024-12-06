@@ -1,6 +1,10 @@
 import os
 import json
 import requests
+from dotenv import load_dotenv
+
+# Load the .env file
+load_dotenv()
 
 # Base Claude API configuration
 claude_api_key = os.getenv("ANTHROPIC_API_KEY")  # Claude API key
@@ -55,15 +59,13 @@ for k in story_dict:
     if response_1.status_code == 200:
         claude_responses[k]['order_1'] = response_1.json().get("completion")
     else:
-        claude_responses[k]['order_1'] = f"Error: {
-            response_1.status_code}, {response_1.text}"
+        claude_responses[k]['order_1'] = f"Error: {response_1.status_code}, {response_1.text}"
 
     response_2 = requests.post(claude_endpoint, headers=headers, json=data_2)
     if response_2.status_code == 200:
         claude_responses[k]['order_2'] = response_2.json().get("completion")
     else:
-        claude_responses[k]['order_2'] = f"Error: {
-            response_2.status_code}, {response_2.text}"
+        claude_responses[k]['order_2'] = f"Error: {response_2.status_code}, {response_2.text}"
 
 json_string = json.dumps(claude_responses, indent=2)
 with open(f'llm_results/claude_{id}_responses_dict_{no}.json', 'w') as json_f:
