@@ -50,6 +50,6 @@ for k in story_dict:
 
 json_string = json.dumps(gpt_responses, indent=2)
 
-with open(f'gpt_results/gpt_{id}_responses_dict_{no}.json', 'w') as json_f:
+with open(f'../llm_results/gpt_{id}_responses_dict_{no}.json', 'w') as json_f:
     json_f.write(json_string)
     

@@ -36,8 +36,8 @@ for k in story_dict:
     story_b = story_dict[k]['Story_B']
 
     # Prompts
-    prompt_1 = f"\n\nHuman: Consider the following story:\n\nStory 1: {story_1}\n\nNow consider two more stories:\n\nStory A: {story_a}\n\nStory B: {story_b}\n\nWhich of Story A and Story B is a better analogy to Story 1? Is the best answer Story A, Story B, or both are equally analogous?\n\nAssistant:"
-    prompt_2 = f"\n\nHuman: Consider the following story:\n\nStory 1: {story_1}\n\nNow consider two more stories:\n\nStory A: {story_b}\n\nStory B: {story_a}\n\nWhich of Story A and Story B is a better analogy to Story 1? Is the best answer Story A, Story B, or both are equally analogous?\n\nAssistant:"
+    prompt_1 = f"\n\nHuman: Consider the following story:\n\nStory 1: {story_1}\n\nNow consider two more stories:\n\nStory A: {story_a}\n\nStory B: {story_b}\n\nWhich of Story A and Story B is a better analogy to Story 1? Is the best answer Story A, Story B, or both are equally analogous? Answer in less than 50 words.\n\nAssistant:"
+    prompt_2 = f"\n\nHuman: Consider the following story:\n\nStory 1: {story_1}\n\nNow consider two more stories:\n\nStory A: {story_b}\n\nStory B: {story_a}\n\nWhich of Story A and Story B is a better analogy to Story 1? Is the best answer Story A, Story B, or both are equally analogous? Answer in less than 50 words.\n\nAssistant:"
 
     # Request payload for Claude
     data_1 = {
@@ -68,5 +68,5 @@ for k in story_dict:
         claude_responses[k]['order_2'] = f"Error: {response_2.status_code}, {response_2.text}"
 
 json_string = json.dumps(claude_responses, indent=2)
-with open(f'llm_results/claude_{id}_responses_dict_{no}.json', 'w') as json_f:
+with open(f'../llm_results/claude_{id}_responses_dict_{no}.json', 'w') as json_f:
     json_f.write(json_string)
